@@ -4,6 +4,7 @@ const app=express();
 const router=require("./routes/router");
 const bodyParser = require('body-parser');
 const port=process.argv.port || 1005;
+const mongoose = require('mongoose');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,12 +17,12 @@ app.set('json spaces', 2);
 //Middleware to handle all routes
 app.use("/",router);
 
-app.listen(port, (err)=>{
-    if(err){
-        throw err;
-    }
-    console.log(`Server listen on the port ${port}.`);
-});
+const connectionString='mongodb://localhost:27017/uas'
+mongoose.connect(connectionString).then(()=>{
+    app.listen(port,function(){
+        console.log("App Is Running on Port "+port);
+    })
+})
 
 //For Catching uncaught exception 
 
