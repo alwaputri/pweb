@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>
+              Form Tambah data
+              <form action="/add" method="POST" class="row g-3">
+              
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="jenis_hewan" class="form-label">Jenis Hewan</label>
+                  <input type="text" class="form-control" id="jenis_hewan" name="jenis_hewan" required>
+                </div>
+                <div class="col-12">
+                  <label for="ras" class="form-label">ras</label>
+                  <input type="text" class="form-control" id="ras"name="ras" required>
+                </div>
+                <div class="col-12">
+                  <label for="service" class="form-label">Service</label>
+                  <input type="text" class="form-control" id="service" name="service" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="owner" class="form-label">Owner</label>
+                  <select id="owner" name="owner" class="form-select">
+                     <option selected>Choose...</option>
+                  </select>
+               </div>
+               
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+              </form>
+
+            </h2>
+        </div>
+    </div>
+</div>

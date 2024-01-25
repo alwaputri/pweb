@@ -1,0 +1,35 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Pets</h2>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Jenis Hewan</th>
+                    <th scope="col">Ras</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Owner</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(function(pet, index) { %>
+                        <tr>
+                            <th scope="row"><%= index + 1 %></th>
+                            <td><%= pet.name %></td>
+                            <td><%= pet.jenis_hewan %></td>
+                            <td><%= pet.ras %></td>
+                            <td><%= pet.service %></td>
+                            <td><%= pet.owner.nama %></td>
+                            <td>
+                                <a href="/detail/<%= pet._id %>" class="btn btn-success badge rounded-pill"><i class="bi bi-info-circle"></i> Detail</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
