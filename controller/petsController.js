@@ -26,6 +26,7 @@ exports.getData = async (req, res, next) => {
             title: 'Grooming',
             data: dataPets
         });
+        
     } catch (error) {
         console.error(error);
         next(error);
@@ -53,28 +54,55 @@ exports.getDataById=async (req,res,next)=>{
 
 
 
-exports.deleteDataById=async (req,res,next)=>{
-    const id= req.params.id;
-    const dataPets=await petsModel.findByIdAndDelete(id)
-    return res.status(200).json({
-        success:true,
-        data: dataPets
-
-    });
-
+ exports.deleteDataById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const dataPets = await petsModel.findByIdAndDelete(id);
+        
+        // Redirect ke halaman petdoc.ejs setelah penghapusan berhasil
+        return res.redirect('/petdoc');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 };
 
-exports.updateDataById=async (req,res,next)=>{
-    const id= req.params.id;
-    const newData= req.body;
-    const dataPets=await petsModel.findByIdAndUpdate(id,newData)
-    return res.status(200).json({
-        success:true,
-        data: dataPets
 
-    });
+exports.getEditForm = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const pet = await petsModel.findById(id);
+        const ownersData = await ownerModel.find();
 
+        res.render('edit', {
+            layout: 'layouts/main-layouts',
+            title: 'Edit Data',
+            data: pet,
+            owners: ownersData
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
 };
+// petsController.js
+
+exports.updateDataById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const newData = req.body;
+        const dataPets = await petsModel.findByIdAndUpdate(id, newData);
+
+        // Setelah pembaruan berhasil, redirect ke halaman petdoc.ejs
+        return res.redirect('/petdoc');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};
+
+
+
 
 exports.postData = async (req, res, next) => {
     try {
@@ -93,10 +121,7 @@ exports.postData = async (req, res, next) => {
         // Simpan data ke dalam database
         await newPet.save();
 
-        return res.status(200).json({
-            success: true,
-            data: newPet
-        });
+        return res.redirect('/petdoc');
     } catch (error) {
         console.error(error);
         next(error);

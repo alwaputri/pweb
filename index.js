@@ -49,7 +49,24 @@ app.get('/add', (req, res) => {
         title: 'tambah data' });
 });
 app.get("/owners", petsController.getOwners);
+app.get("/owners/view", ownerController.getOwnersView);
+app.get("/owners/edit/:id", ownerController.getEditOwnerForm);
+app.post("/owners/edit/:id", ownerController.updateOwnerById);
+app.post("/owners/delete/:id", ownerController.deleteOwnerById);
 app.post("/add", petsController.postData);
+app.get("/form/:id", petsController.getEditForm);
+app.post("/edit/:id", petsController.updateDataById);
+app.post("/delete/:id", petsController.deleteDataById);
+app.get("/add-owner", (req, res) => {
+    res.render('addOwner', {
+        layout: 'layouts/main-layouts',
+        title: 'Tambah Pemilik'
+    });
+});
+
+app.post("/add-owner", ownerController.postData);
+
+
 app.set('json spaces', 2);
 
 //Middleware to handle all routes
